@@ -5,5 +5,3 @@ import DPGenerator from './components/DPGenerator.vue'
 <template>
     <DPGenerator />
 </template>
-
-<style scoped></style>
