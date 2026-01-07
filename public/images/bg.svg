@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1500" viewBox="0 0 1500 1500">
   <defs>
     <!-- Very dark teal/navy base -->
-    <radialGradient id="bgBase" cx="50%" cy="42%" r="85%">
+    <radialGradient id="bgBase" cx="50%" cy="50%" r="85%">
       <stop offset="0%" stop-color="#1a3d4d"/>
       <stop offset="35%" stop-color="#0f2a35"/>
       <stop offset="60%" stop-color="#081c24"/>
@@ -9,7 +9,7 @@
     </radialGradient>
     
     <!-- Bright center glow - white/light blue -->
-    <radialGradient id="centerGlow" cx="50%" cy="42%" r="35%">
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="35%">
       <stop offset="0%" stop-color="#c8e8f0" stop-opacity="0.95"/>
       <stop offset="20%" stop-color="#8cc8d8" stop-opacity="0.7"/>
       <stop offset="45%" stop-color="#4a98a8" stop-opacity="0.45"/>
@@ -18,7 +18,7 @@
     </radialGradient>
     
     <!-- Secondary soft glow -->
-    <radialGradient id="softGlow" cx="50%" cy="42%" r="50%">
+    <radialGradient id="softGlow" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#6ab8c8" stop-opacity="0.3"/>
       <stop offset="50%" stop-color="#3a7888" stop-opacity="0.15"/>
       <stop offset="100%" stop-color="#1a4858" stop-opacity="0"/>
@@ -37,10 +37,10 @@
   <rect width="1500" height="1500" fill="url(#bgBase)"/>
   
   <!-- Main center bright glow -->
-  <ellipse cx="750" cy="630" rx="550" ry="480" fill="url(#centerGlow)"/>
+  <ellipse cx="750" cy="750" rx="550" ry="550" fill="url(#centerGlow)"/>
   
   <!-- Secondary soft glow layer -->
-  <ellipse cx="750" cy="630" rx="700" ry="600" fill="url(#softGlow)"/>
+  <ellipse cx="750" cy="750" rx="700" ry="700" fill="url(#softGlow)"/>
   
   <!-- Atmospheric bokeh effects -->
   <g filter="url(#blur1)" opacity="0.25">

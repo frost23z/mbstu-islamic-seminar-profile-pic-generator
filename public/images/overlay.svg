@@ -22,17 +22,17 @@
   
   <!-- ===== EVENT TITLE - Bottom Center ===== -->
   <!-- Main title line 1 -->
-  <text x="750" y="1180" font-family="'Cinzel', serif" font-size="72" fill="url(#goldTextGrad)" text-anchor="middle" font-weight="600" letter-spacing="8" filter="url(#textShadow)">
+  <text x="750" y="1160" font-family="'Cinzel', serif" font-size="100" fill="url(#goldTextGrad)" text-anchor="middle" font-weight="600" letter-spacing="8" filter="url(#textShadow)">
     MBSTU Islamic Seminar
   </text>
   
   <!-- Main title line 2 -->
-  <text x="750" y="1270" font-family="'Cinzel', serif" font-size="56" fill="url(#goldTextGrad)" text-anchor="middle" font-weight="500" letter-spacing="6" filter="url(#textShadow)">
+  <text x="750" y="1270" font-family="'Cinzel', serif" font-size="68" fill="url(#goldTextGrad)" text-anchor="middle" font-weight="500" letter-spacing="6" filter="url(#textShadow)">
     &amp; Book Fair 2026
   </text>
   
   <!-- Date -->
-  <text x="750" y="1360" font-family="'Inter', sans-serif" font-size="44" fill="#ffffff" text-anchor="middle" font-weight="500" letter-spacing="4" filter="url(#textShadow)">
+  <text x="750" y="1380" font-family="'Inter', sans-serif" font-size="70" fill="#ffffff" text-anchor="middle" font-weight="500" letter-spacing="4" filter="url(#textShadow)">
     10 January
   </text>
 </svg>

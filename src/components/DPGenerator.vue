@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { ImageIcon, Upload, CheckCircle2, Download, Sparkles, Camera, Move } from 'lucide-vue-next'
+import {
+    ImageIcon,
+    Upload,
+    CheckCircle2,
+    Download,
+    Sparkles,
+    Camera,
+    Move,
+    Palette,
+} from 'lucide-vue-next'
 import CanvasPreview from './CanvasPreview.vue'
 import AdjustmentPanel from './AdjustmentPanel.vue'
 
 const BG_IMAGE_URL = '/images/bg.svg'
-const OVERLAY_IMAGE_URL = '/images/overlay.svg'
 
 const PREDEFINED_PHOTOS = [
     { id: 'avatar1', src: '/images/avatars/avatar1.jpg', label: 'Avatar 1' },
@@ -21,6 +29,8 @@ const selectedPreset = ref<string | null>(null)
 const scale = ref(1)
 const offsetX = ref(0)
 const offsetY = ref(0)
+const titleColor = ref('#d4a853')
+const dateColor = ref('#ffffff')
 const fileInputRef = ref<HTMLInputElement | null>(null)
 const canvasPreviewRef = ref<InstanceType<typeof CanvasPreview> | null>(null)
 
@@ -50,16 +60,57 @@ const resetTransforms = () => {
     offsetY.value = 0
 }
 
-const handleDownload = () => {
+const handleDownload = async () => {
     if (!userImage.value || !canvasPreviewRef.value?.canvasRef) return
 
     const canvas = canvasPreviewRef.value.canvasRef
-    const link = document.createElement('a')
-    link.href = canvas.toDataURL('image/png')
-    link.download = 'mbstu-islamic-seminar-profile.png'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
+
+    // Try using the modern share API on mobile (allows saving to photos)
+    if (navigator.share && navigator.canShare) {
+        try {
+            const blob = await new Promise<Blob>((resolve) => {
+                canvas.toBlob((b) => resolve(b!), 'image/png')
+            })
+            const file = new File([blob], 'mbstu-islamic-seminar-profile.png', {
+                type: 'image/png',
+            })
+
+            if (navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    files: [file],
+                    title: 'MBSTU Islamic Seminar Profile',
+                })
+                return
+            }
+        } catch {
+            // User cancelled or share failed, fall through to download
+            console.log('Share cancelled or failed, trying download...')
+        }
+    }
+
+    // Fallback: Try blob URL download (better mobile compatibility)
+    try {
+        const blob = await new Promise<Blob>((resolve) => {
+            canvas.toBlob((b) => resolve(b!), 'image/png')
+        })
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = 'mbstu-islamic-seminar-profile.png'
+        link.style.display = 'none'
+        document.body.appendChild(link)
+        link.click()
+
+        // Clean up
+        setTimeout(() => {
+            document.body.removeChild(link)
+            URL.revokeObjectURL(url)
+        }, 100)
+    } catch {
+        // Final fallback: Open image in new tab (user can long-press to save)
+        const dataUrl = canvas.toDataURL('image/png')
+        window.open(dataUrl, '_blank')
+    }
 }
 
 const triggerFileInput = () => {
@@ -242,7 +293,8 @@ const triggerFileInput = () => {
                                     :offset-x="offsetX"
                                     :offset-y="offsetY"
                                     :bg-image-url="BG_IMAGE_URL"
-                                    :overlay-image-url="OVERLAY_IMAGE_URL"
+                                    :title-color="titleColor"
+                                    :date-color="dateColor"
                                 />
                             </div>
                         </template>
@@ -288,6 +340,56 @@ const triggerFileInput = () => {
                                 @update:offset-x="offsetX = $event"
                                 @update:offset-y="offsetY = $event"
                             />
+                        </section>
+
+                        <!-- Color Controls Section -->
+                        <section
+                            class="bg-white/10 backdrop-blur-md rounded-3xl border border-white/20 p-6 shadow-2xl"
+                        >
+                            <h2
+                                class="text-xl font-semibold text-white mb-5 flex items-center gap-3"
+                            >
+                                <div class="p-2 bg-amber-500/20 rounded-xl">
+                                    <Palette class="w-5 h-5 text-amber-400" />
+                                </div>
+                                Text Colors
+                            </h2>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-white/80 text-sm font-medium"
+                                        >Title Color</label
+                                    >
+                                    <div class="flex items-center gap-3">
+                                        <input
+                                            type="color"
+                                            v-model="titleColor"
+                                            class="w-10 h-10 rounded-lg cursor-pointer border-2 border-white/20 bg-transparent"
+                                        />
+                                        <input
+                                            type="text"
+                                            v-model="titleColor"
+                                            class="w-24 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white text-sm font-mono"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <label class="text-white/80 text-sm font-medium"
+                                        >Date Color</label
+                                    >
+                                    <div class="flex items-center gap-3">
+                                        <input
+                                            type="color"
+                                            v-model="dateColor"
+                                            class="w-10 h-10 rounded-lg cursor-pointer border-2 border-white/20 bg-transparent"
+                                        />
+                                        <input
+                                            type="text"
+                                            v-model="dateColor"
+                                            class="w-24 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white text-sm font-mono"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                         </section>
 
                         <!-- Download Button -->
