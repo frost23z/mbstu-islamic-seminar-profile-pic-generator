@@ -65,12 +65,14 @@ const handleDownload = async () => {
 
     const canvas = canvasPreviewRef.value.canvasRef
 
-    // Try using the modern share API on mobile (allows saving to photos)
+    // Create blob for download
+    const blob = await new Promise<Blob>((resolve) => {
+        canvas.toBlob((b) => resolve(b!), 'image/png')
+    })
+
+    // Method 1: Try Share API (best for mobile - allows saving to Photos)
     if (navigator.share && navigator.canShare) {
         try {
-            const blob = await new Promise<Blob>((resolve) => {
-                canvas.toBlob((b) => resolve(b!), 'image/png')
-            })
             const file = new File([blob], 'mbstu-islamic-seminar-profile.png', {
                 type: 'image/png',
             })
@@ -83,34 +85,24 @@ const handleDownload = async () => {
                 return
             }
         } catch {
-            // User cancelled or share failed, fall through to download
-            console.log('Share cancelled or failed, trying download...')
+            // User cancelled or share failed, continue to download
         }
     }
 
-    // Fallback: Try blob URL download (better mobile compatibility)
-    try {
-        const blob = await new Promise<Blob>((resolve) => {
-            canvas.toBlob((b) => resolve(b!), 'image/png')
-        })
-        const url = URL.createObjectURL(blob)
-        const link = document.createElement('a')
-        link.href = url
-        link.download = 'mbstu-islamic-seminar-profile.png'
-        link.style.display = 'none'
-        document.body.appendChild(link)
-        link.click()
+    // Method 2: Blob URL download with download attribute
+    // This triggers native DownloadListener in webviews that support it
+    const blobUrl = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = blobUrl
+    link.download = 'mbstu-islamic-seminar-profile.png'
+    document.body.appendChild(link)
+    link.click()
 
-        // Clean up
-        setTimeout(() => {
-            document.body.removeChild(link)
-            URL.revokeObjectURL(url)
-        }, 100)
-    } catch {
-        // Final fallback: Open image in new tab (user can long-press to save)
-        const dataUrl = canvas.toDataURL('image/png')
-        window.open(dataUrl, '_blank')
-    }
+    // Clean up after a delay
+    setTimeout(() => {
+        document.body.removeChild(link)
+        URL.revokeObjectURL(blobUrl)
+    }, 1000)
 }
 
 const triggerFileInput = () => {
