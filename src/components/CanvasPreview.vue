@@ -50,7 +50,7 @@ const drawCanvas = () => {
             const centerX = canvas.width / 2
             const centerY = 630 // Aligned with background glow center
             const radius = 550 // Profile photo radius
-            const fadeWidth = 180 // Width of the fade zone
+            const fadeWidth = 250 // Width of the fade zone
 
             // Calculate image dimensions to cover circle while maintaining aspect ratio
             const imgAspect = userImg.width / userImg.height
