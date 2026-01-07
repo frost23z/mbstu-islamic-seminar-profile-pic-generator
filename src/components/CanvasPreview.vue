@@ -39,10 +39,10 @@ const drawCanvas = () => {
         if (imagesLoaded < totalImages) return
 
         // Draw circular mask with user image
-        // Profile circle is at (750, 720) with radius 485 to fit inside the gold ring
-        const maskRadius = 485
+        // Profile circle is at (750, 680) with radius 435 to fit inside the gold ring
+        const maskRadius = 435
         const centerX = canvas.width / 2
-        const centerY = 720
+        const centerY = 680
 
         const userImg = new Image()
         userImg.crossOrigin = 'anonymous'

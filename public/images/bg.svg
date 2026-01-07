@@ -35,7 +35,7 @@
   <rect width="1500" height="1500" fill="url(#dots)"/>
   
   <!-- Center glow -->
-  <circle cx="750" cy="720" r="700" fill="url(#centerGlow)"/>
+  <circle cx="750" cy="680" r="700" fill="url(#centerGlow)"/>
   
   <!-- Corner decorations -->
   <path d="M0,0 L300,0 Q150,150 0,300 Z" fill="#5eead4" opacity="0.08"/>
@@ -44,6 +44,6 @@
   <path d="M1500,1500 L1200,1500 Q1350,1350 1500,1200 Z" fill="#5eead4" opacity="0.08"/>
   
   <!-- Subtle inner glow ring -->
-  <circle cx="750" cy="720" r="520" fill="none" stroke="#5eead4" stroke-width="2" opacity="0.1"/>
-  <circle cx="750" cy="720" r="540" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.05"/>
+  <circle cx="750" cy="680" r="490" fill="none" stroke="#5eead4" stroke-width="2" opacity="0.1"/>
+  <circle cx="750" cy="680" r="510" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.05"/>
 </svg>

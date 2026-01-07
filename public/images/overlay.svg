@@ -1,11 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1500" height="1500" viewBox="0 0 1500 1500">
   <defs>
-    <!-- Premium gradient for frame -->
-    <linearGradient id="frameGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#059669"/>
-      <stop offset="50%" stop-color="#0d9488"/>
-      <stop offset="100%" stop-color="#0891b2"/>
-    </linearGradient>
+    <!-- Embed Google Fonts -->
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Playfair+Display:wght@600;700;800&amp;display=swap');
+    </style>
     
     <!-- Gold accent gradient -->
     <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -14,76 +12,152 @@
       <stop offset="100%" stop-color="#d97706"/>
     </linearGradient>
     
-    <!-- Bottom banner gradient -->
-    <linearGradient id="bottomGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#0f172a" stop-opacity="0.92"/>
-      <stop offset="100%" stop-color="#134e4a" stop-opacity="0.98"/>
+    <!-- Premium gold gradient for frame -->
+    <linearGradient id="goldFrameGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fcd34d"/>
+      <stop offset="25%" stop-color="#fbbf24"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="75%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#b45309"/>
     </linearGradient>
     
-    <!-- Glow filter -->
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="4" result="blur"/>
+    <!-- Teal gradient -->
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5eead4"/>
+      <stop offset="100%" stop-color="#2dd4bf"/>
+    </linearGradient>
+    
+    <!-- Dark bottom banner gradient -->
+    <linearGradient id="bottomGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#134e4a" stop-opacity="0.96"/>
+    </linearGradient>
+    
+    <!-- Glow filter - enhanced -->
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Soft glow for decorations -->
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
       <feMerge>
         <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
     
-    <!-- Shadow filter -->
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000000" flood-opacity="0.4"/>
+    <!-- Shadow filter for banner -->
+    <filter id="shadow" x="-10%" y="-20%" width="120%" height="140%">
+      <feDropShadow dx="0" dy="-6" stdDeviation="12" flood-color="#000000" flood-opacity="0.4"/>
     </filter>
+    
+    <!-- Strong text shadow -->
+    <filter id="textShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.7"/>
+    </filter>
+    
+    <!-- Date badge glow -->
+    <filter id="dateGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Arc path for TOP text (university) -->
+    <path id="topArc" d="M 150,750 A 600,600 0 0,1 1350,750" fill="none"/>
+    
+    <!-- Arc path for BOTTOM text (seminar title) -->
+    <path id="bottomArc" d="M 150,800 A 600,600 0 0,0 1350,800" fill="none"/>
   </defs>
   
-  <!-- Circular frame around profile area -->
-  <circle cx="750" cy="720" r="500" fill="none" stroke="url(#goldGrad)" stroke-width="10" filter="url(#glow)"/>
-  <circle cx="750" cy="720" r="490" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.4"/>
-  <circle cx="750" cy="720" r="512" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
-  
-  <!-- Decorative corner accents -->
-  <g opacity="0.5">
-    <path d="M50,280 L50,380 M10,330 L90,330" stroke="url(#goldGrad)" stroke-width="3" stroke-linecap="round"/>
-    <path d="M1450,280 L1450,380 M1410,330 L1490,330" stroke="url(#goldGrad)" stroke-width="3" stroke-linecap="round"/>
+  <!-- ===== BACKGROUND DECORATIONS ===== -->
+  <!-- Subtle radial lines from center -->
+  <g opacity="0.08">
+    <line x1="750" y1="680" x2="150" y2="200" stroke="#5eead4" stroke-width="1"/>
+    <line x1="750" y1="680" x2="1350" y2="200" stroke="#5eead4" stroke-width="1"/>
+    <line x1="750" y1="680" x2="100" y2="680" stroke="#5eead4" stroke-width="1"/>
+    <line x1="750" y1="680" x2="1400" y2="680" stroke="#5eead4" stroke-width="1"/>
   </g>
   
-  <!-- Subtle corner sparkles -->
-  <g opacity="0.4">
-    <circle cx="100" cy="100" r="3" fill="#fbbf24"/>
-    <circle cx="130" cy="70" r="2" fill="#fbbf24"/>
-    <circle cx="1400" cy="100" r="3" fill="#fbbf24"/>
-    <circle cx="1370" cy="70" r="2" fill="#fbbf24"/>
-  </g>
-  
-  <!-- Bottom banner -->
-  <path d="M0,1260 Q750,1200 1500,1260 L1500,1500 L0,1500 Z" fill="url(#bottomGrad)" filter="url(#shadow)"/>
+  <!-- Dark curved bottom banner -->
+  <path d="M0,1180 Q750,1100 1500,1180 L1500,1500 L0,1500 Z" fill="url(#bottomGrad)" filter="url(#shadow)"/>
   
   <!-- Gold accent line at top of banner -->
-  <path d="M0,1262 Q750,1202 1500,1262" fill="none" stroke="url(#goldGrad)" stroke-width="4" filter="url(#glow)"/>
-  
-  <!-- Main Event Title -->
-  <text x="750" y="1330" font-family="Georgia, 'Times New Roman', serif" font-size="72" fill="white" text-anchor="middle" font-weight="700" letter-spacing="4">
-    Islamic Seminar
-  </text>
-  
-  <!-- Sub title with decorative elements -->
-  <g>
-    <line x1="280" y1="1375" x2="480" y2="1375" stroke="url(#goldGrad)" stroke-width="2" opacity="0.6"/>
-    <text x="750" y="1390" font-family="Georgia, 'Times New Roman', serif" font-size="52" fill="#5eead4" text-anchor="middle" font-weight="600" letter-spacing="6">
-      &amp; Book Fair 2026
-    </text>
-    <line x1="1020" y1="1375" x2="1220" y2="1375" stroke="url(#goldGrad)" stroke-width="2" opacity="0.6"/>
-  </g>
-  
-  <!-- University name -->
-  <text x="750" y="1460" font-family="Georgia, 'Times New Roman', serif" font-size="36" fill="#94a3b8" text-anchor="middle" font-weight="500" letter-spacing="2">
-    Mawlana Bhashani Science &amp; Technology University
-  </text>
-  
-  <!-- Small decorative dots -->
-  <circle cx="180" cy="1460" r="5" fill="url(#goldGrad)" opacity="0.5"/>
-  <circle cx="1320" cy="1460" r="5" fill="url(#goldGrad)" opacity="0.5"/>
+  <path d="M0,1182 Q750,1102 1500,1182" fill="none" stroke="url(#goldGrad)" stroke-width="4" filter="url(#glow)"/>
   
   <!-- Side accent lines -->
-  <line x1="25" y1="350" x2="25" y2="1150" stroke="url(#frameGrad)" stroke-width="5" stroke-linecap="round" opacity="0.3"/>
-  <line x1="1475" y1="350" x2="1475" y2="1150" stroke="url(#frameGrad)" stroke-width="5" stroke-linecap="round" opacity="0.3"/>
+  <line x1="70" y1="320" x2="70" y2="1000" stroke="url(#tealGrad)" stroke-width="2.5" stroke-linecap="round" opacity="0.3"/>
+  <line x1="1430" y1="320" x2="1430" y2="1000" stroke="url(#tealGrad)" stroke-width="2.5" stroke-linecap="round" opacity="0.3"/>
+  
+  <!-- Corner sparkles -->
+  <g opacity="0.6" filter="url(#softGlow)">
+    <circle cx="180" cy="260" r="5" fill="#fbbf24"/>
+    <circle cx="220" cy="210" r="3" fill="#fbbf24"/>
+    <circle cx="140" cy="310" r="2.5" fill="#fbbf24"/>
+    <circle cx="1320" cy="260" r="5" fill="#fbbf24"/>
+    <circle cx="1280" cy="210" r="3" fill="#fbbf24"/>
+    <circle cx="1360" cy="310" r="2.5" fill="#fbbf24"/>
+  </g>
+  
+  <!-- ===== PROFILE FRAME ===== -->
+  <!-- Outer glow ring -->
+  <circle cx="750" cy="680" r="470" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.15" filter="url(#softGlow)"/>
+  <!-- Main gold frame -->
+  <circle cx="750" cy="680" r="450" fill="none" stroke="url(#goldFrameGrad)" stroke-width="16" filter="url(#glow)"/>
+  <!-- Inner white accent -->
+  <circle cx="750" cy="680" r="434" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+  <!-- Innermost subtle ring -->
+  <circle cx="750" cy="680" r="430" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
+  
+  <!-- ===== UNIVERSITY TEXT - TOP ===== -->
+  <text font-family="'Inter', sans-serif" font-size="34" fill="#a1a1aa" font-weight="600" letter-spacing="4" filter="url(#textShadow)">
+    <textPath href="#topArc" startOffset="50%" text-anchor="middle">
+      MAWLANA BHASHANI SCIENCE &amp; TECHNOLOGY UNIVERSITY
+    </textPath>
+  </text>
+  
+  <!-- ===== DATE BADGE ===== -->
+  <g filter="url(#dateGlow)">
+    <rect x="515" y="1160" width="470" height="74" rx="37" fill="url(#goldGrad)"/>
+    <rect x="525" y="1166" width="450" height="32" rx="16" fill="#ffffff" opacity="0.25"/>
+  </g>
+  <text x="750" y="1210" font-family="'Inter', sans-serif" font-size="42" fill="#0f172a" text-anchor="middle" font-weight="900" letter-spacing="5">
+    10 JAN 2026
+  </text>
+  
+  <!-- ===== SEMINAR TEXT - BOTTOM ===== -->
+  <text font-family="'Playfair Display', Georgia, serif" font-size="64" fill="white" font-weight="700" filter="url(#textShadow)">
+    <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">
+      Islamic Seminar &amp; Book Fair
+    </textPath>
+  </text>
+  
+  <!-- ===== TOP DECORATIONS ===== -->
+  <g opacity="0.8" filter="url(#softGlow)">
+    <circle cx="750" cy="185" r="6" fill="url(#goldGrad)"/>
+    <circle cx="700" cy="195" r="3.5" fill="url(#goldGrad)"/>
+    <circle cx="800" cy="195" r="3.5" fill="url(#goldGrad)"/>
+    <circle cx="660" cy="210" r="2" fill="url(#goldGrad)"/>
+    <circle cx="840" cy="210" r="2" fill="url(#goldGrad)"/>
+  </g>
+  
+  <!-- Banner decorative dots -->
+  <g opacity="0.5" filter="url(#softGlow)">
+    <circle cx="180" cy="1380" r="5" fill="url(#goldGrad)"/>
+    <circle cx="220" cy="1400" r="3" fill="url(#goldGrad)"/>
+    <circle cx="1320" cy="1380" r="5" fill="url(#goldGrad)"/>
+    <circle cx="1280" cy="1400" r="3" fill="url(#goldGrad)"/>
+  </g>
+  
+  <!-- Subtle decorative arcs inside corners -->
+  <path d="M 100,150 Q 150,100 200,100" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" opacity="0.3"/>
+  <path d="M 1400,150 Q 1350,100 1300,100" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" opacity="0.3"/>
 </svg>
