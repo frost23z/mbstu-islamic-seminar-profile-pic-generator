@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1500" height="1500" viewBox="0 0 1500 1500">
+  <defs>
+    <!-- Premium gradient for frame -->
+    <linearGradient id="frameGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="50%" stop-color="#0d9488"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+    
+    <!-- Gold accent gradient -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    
+    <!-- Bottom banner gradient -->
+    <linearGradient id="bottomGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#134e4a" stop-opacity="0.98"/>
+    </linearGradient>
+    
+    <!-- Glow filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Shadow filter -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  
+  <!-- Circular frame around profile area -->
+  <circle cx="750" cy="720" r="500" fill="none" stroke="url(#goldGrad)" stroke-width="10" filter="url(#glow)"/>
+  <circle cx="750" cy="720" r="490" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.4"/>
+  <circle cx="750" cy="720" r="512" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
+  
+  <!-- Decorative corner accents -->
+  <g opacity="0.5">
+    <path d="M50,280 L50,380 M10,330 L90,330" stroke="url(#goldGrad)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M1450,280 L1450,380 M1410,330 L1490,330" stroke="url(#goldGrad)" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Subtle corner sparkles -->
+  <g opacity="0.4">
+    <circle cx="100" cy="100" r="3" fill="#fbbf24"/>
+    <circle cx="130" cy="70" r="2" fill="#fbbf24"/>
+    <circle cx="1400" cy="100" r="3" fill="#fbbf24"/>
+    <circle cx="1370" cy="70" r="2" fill="#fbbf24"/>
+  </g>
+  
+  <!-- Bottom banner -->
+  <path d="M0,1260 Q750,1200 1500,1260 L1500,1500 L0,1500 Z" fill="url(#bottomGrad)" filter="url(#shadow)"/>
+  
+  <!-- Gold accent line at top of banner -->
+  <path d="M0,1262 Q750,1202 1500,1262" fill="none" stroke="url(#goldGrad)" stroke-width="4" filter="url(#glow)"/>
+  
+  <!-- Main Event Title -->
+  <text x="750" y="1330" font-family="Georgia, 'Times New Roman', serif" font-size="72" fill="white" text-anchor="middle" font-weight="700" letter-spacing="4">
+    Islamic Seminar
+  </text>
+  
+  <!-- Sub title with decorative elements -->
+  <g>
+    <line x1="280" y1="1375" x2="480" y2="1375" stroke="url(#goldGrad)" stroke-width="2" opacity="0.6"/>
+    <text x="750" y="1390" font-family="Georgia, 'Times New Roman', serif" font-size="52" fill="#5eead4" text-anchor="middle" font-weight="600" letter-spacing="6">
+      &amp; Book Fair 2026
+    </text>
+    <line x1="1020" y1="1375" x2="1220" y2="1375" stroke="url(#goldGrad)" stroke-width="2" opacity="0.6"/>
+  </g>
+  
+  <!-- University name -->
+  <text x="750" y="1460" font-family="Georgia, 'Times New Roman', serif" font-size="36" fill="#94a3b8" text-anchor="middle" font-weight="500" letter-spacing="2">
+    Mawlana Bhashani Science &amp; Technology University
+  </text>
+  
+  <!-- Small decorative dots -->
+  <circle cx="180" cy="1460" r="5" fill="url(#goldGrad)" opacity="0.5"/>
+  <circle cx="1320" cy="1460" r="5" fill="url(#goldGrad)" opacity="0.5"/>
+  
+  <!-- Side accent lines -->
+  <line x1="25" y1="350" x2="25" y2="1150" stroke="url(#frameGrad)" stroke-width="5" stroke-linecap="round" opacity="0.3"/>
+  <line x1="1475" y1="350" x2="1475" y2="1150" stroke="url(#frameGrad)" stroke-width="5" stroke-linecap="round" opacity="0.3"/>
+</svg>
