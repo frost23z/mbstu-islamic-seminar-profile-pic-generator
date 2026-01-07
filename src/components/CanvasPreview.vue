@@ -46,10 +46,11 @@ const drawCanvas = () => {
             // 1. Draw background first
             ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height)
 
-            // 2. Draw user image inside circular mask
+            // 2. Draw user image with soft fading edge
             const centerX = canvas.width / 2
-            const centerY = 680 // Slightly above center
-            const radius = 480 // Circle radius for profile photo
+            const centerY = 630 // Aligned with background glow center
+            const radius = 550 // Profile photo radius
+            const fadeWidth = 180 // Width of the fade zone
 
             // Calculate image dimensions to cover circle while maintaining aspect ratio
             const imgAspect = userImg.width / userImg.height
@@ -69,38 +70,44 @@ const drawCanvas = () => {
             const drawX = centerX - drawWidth / 2 + props.offsetX
             const drawY = centerY - drawHeight / 2 + props.offsetY
 
-            // Create circular clipping path
-            ctx.save()
-            ctx.beginPath()
-            ctx.arc(centerX, centerY, radius, 0, Math.PI * 2)
-            ctx.closePath()
-            ctx.clip()
+            // Create an offscreen canvas to draw the user image with soft edges
+            const offCanvas = document.createElement('canvas')
+            offCanvas.width = canvas.width
+            offCanvas.height = canvas.height
+            const offCtx = offCanvas.getContext('2d')!
 
-            // Draw user image inside the clipped circle
-            ctx.drawImage(userImg, drawX, drawY, drawWidth, drawHeight)
-            ctx.restore()
+            // Draw user image on offscreen canvas (clipped to larger area)
+            offCtx.save()
+            offCtx.beginPath()
+            offCtx.arc(centerX, centerY, radius + 20, 0, Math.PI * 2)
+            offCtx.closePath()
+            offCtx.clip()
+            offCtx.drawImage(userImg, drawX, drawY, drawWidth, drawHeight)
+            offCtx.restore()
 
-            // 2.5. Add blur/feather effect at the edge of the circle
-            // Create a radial gradient that fades from transparent to background color
-            const blurWidth = 120 // Width of the blur effect
-            const gradient = ctx.createRadialGradient(
+            // Apply radial gradient mask to fade edges
+            offCtx.globalCompositeOperation = 'destination-in'
+            const maskGradient = offCtx.createRadialGradient(
                 centerX,
                 centerY,
-                radius - blurWidth,
+                radius - fadeWidth,
                 centerX,
                 centerY,
-                radius + 20,
+                radius,
             )
-            gradient.addColorStop(0, 'rgba(10, 40, 40, 0)')
-            gradient.addColorStop(0.4, 'rgba(10, 40, 40, 0.3)')
-            gradient.addColorStop(0.7, 'rgba(10, 40, 40, 0.6)')
-            gradient.addColorStop(0.9, 'rgba(10, 40, 40, 0.85)')
-            gradient.addColorStop(1, 'rgba(10, 40, 40, 1)')
+            maskGradient.addColorStop(0, 'rgba(0, 0, 0, 1)')
+            maskGradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.9)')
+            maskGradient.addColorStop(0.75, 'rgba(0, 0, 0, 0.5)')
+            maskGradient.addColorStop(0.9, 'rgba(0, 0, 0, 0.2)')
+            maskGradient.addColorStop(1, 'rgba(0, 0, 0, 0)')
 
-            ctx.beginPath()
-            ctx.arc(centerX, centerY, radius + 20, 0, Math.PI * 2)
-            ctx.fillStyle = gradient
-            ctx.fill()
+            offCtx.beginPath()
+            offCtx.arc(centerX, centerY, radius + 20, 0, Math.PI * 2)
+            offCtx.fillStyle = maskGradient
+            offCtx.fill()
+
+            // Draw the masked image onto main canvas
+            ctx.drawImage(offCanvas, 0, 0)
 
             // 3. Draw overlay on top of everything
             ctx.drawImage(overlayImage, 0, 0, canvas.width, canvas.height)

@@ -1,48 +1,64 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1500" viewBox="0 0 1500 1500">
   <defs>
-    <!-- Dark teal base -->
-    <radialGradient id="bgGradient" cx="50%" cy="45%" r="70%">
-      <stop offset="0%" stop-color="#1a4a4a"/>
-      <stop offset="40%" stop-color="#0d3535"/>
-      <stop offset="70%" stop-color="#0a2828"/>
-      <stop offset="100%" stop-color="#051a1a"/>
+    <!-- Very dark teal/navy base -->
+    <radialGradient id="bgBase" cx="50%" cy="42%" r="85%">
+      <stop offset="0%" stop-color="#1a3d4d"/>
+      <stop offset="35%" stop-color="#0f2a35"/>
+      <stop offset="60%" stop-color="#081c24"/>
+      <stop offset="100%" stop-color="#040e12"/>
     </radialGradient>
     
-    <!-- Center light glow -->
-    <radialGradient id="centerGlow" cx="50%" cy="45%" r="45%">
-      <stop offset="0%" stop-color="#4a9090" stop-opacity="0.5"/>
-      <stop offset="30%" stop-color="#2d6b6b" stop-opacity="0.3"/>
-      <stop offset="60%" stop-color="#1a4a4a" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#0d3535" stop-opacity="0"/>
+    <!-- Bright center glow - white/light blue -->
+    <radialGradient id="centerGlow" cx="50%" cy="42%" r="35%">
+      <stop offset="0%" stop-color="#c8e8f0" stop-opacity="0.95"/>
+      <stop offset="20%" stop-color="#8cc8d8" stop-opacity="0.7"/>
+      <stop offset="45%" stop-color="#4a98a8" stop-opacity="0.45"/>
+      <stop offset="70%" stop-color="#2a6878" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#1a4858" stop-opacity="0"/>
     </radialGradient>
     
-    <!-- Subtle noise texture -->
-    <filter id="noise">
-      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" result="noise"/>
-      <feColorMatrix type="saturate" values="0"/>
-      <feBlend in="SourceGraphic" mode="multiply" in2="noise"/>
+    <!-- Secondary soft glow -->
+    <radialGradient id="softGlow" cx="50%" cy="42%" r="50%">
+      <stop offset="0%" stop-color="#6ab8c8" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#3a7888" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#1a4858" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- Blur filter for bokeh -->
+    <filter id="blur1">
+      <feGaussianBlur stdDeviation="50"/>
     </filter>
-    
-    <!-- Soft blur for bokeh -->
-    <filter id="blur">
-      <feGaussianBlur stdDeviation="40"/>
+    <filter id="blur2">
+      <feGaussianBlur stdDeviation="30"/>
     </filter>
   </defs>
   
-  <!-- Dark base -->
-  <rect width="1500" height="1500" fill="url(#bgGradient)"/>
+  <!-- Dark base layer -->
+  <rect width="1500" height="1500" fill="url(#bgBase)"/>
   
-  <!-- Center light area -->
-  <ellipse cx="750" cy="650" rx="600" ry="500" fill="url(#centerGlow)"/>
+  <!-- Main center bright glow -->
+  <ellipse cx="750" cy="630" rx="550" ry="480" fill="url(#centerGlow)"/>
   
-  <!-- Subtle bokeh effects -->
-  <g filter="url(#blur)" opacity="0.15">
-    <circle cx="300" cy="1200" r="150" fill="#2d8a8a"/>
-    <circle cx="1200" cy="1100" r="100" fill="#3d9a9a"/>
-    <circle cx="1350" cy="400" r="80" fill="#2d7a7a"/>
-    <circle cx="200" cy="350" r="60" fill="#3d8a8a"/>
+  <!-- Secondary soft glow layer -->
+  <ellipse cx="750" cy="630" rx="700" ry="600" fill="url(#softGlow)"/>
+  
+  <!-- Atmospheric bokeh effects -->
+  <g filter="url(#blur1)" opacity="0.25">
+    <circle cx="250" cy="1150" r="120" fill="#3a8898"/>
+    <circle cx="1280" cy="1050" r="90" fill="#4a98a8"/>
+    <circle cx="1350" cy="350" r="70" fill="#3a7888"/>
+    <circle cx="180" cy="380" r="55" fill="#4a8898"/>
+    <circle cx="1100" cy="280" r="45" fill="#3a7888"/>
   </g>
   
-  <!-- Very subtle texture overlay -->
-  <rect width="1500" height="1500" fill="#0a2020" opacity="0.1"/>
+  <!-- Smaller bokeh spots -->
+  <g filter="url(#blur2)" opacity="0.2">
+    <circle cx="350" cy="950" r="40" fill="#5aa8b8"/>
+    <circle cx="1200" cy="850" r="35" fill="#4a98a8"/>
+    <circle cx="200" cy="600" r="30" fill="#4a8898"/>
+    <circle cx="1380" cy="700" r="45" fill="#3a8898"/>
+  </g>
+  
+  <!-- Subtle vignette overlay -->
+  <rect width="1500" height="1500" fill="url(#bgBase)" opacity="0.15"/>
 </svg>
